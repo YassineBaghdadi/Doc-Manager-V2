@@ -7,3 +7,4 @@
 2020-03-30 13:47:07, name 'Main' is not defined, username used : admin
 2020-03-30 13:47:57, name 'Main' is not defined, username used : admin
 2020-03-30 13:48:36, name 'Main' is not defined, username used : admin
+2020-04-02 23:31:52 'NoneType' object is not subscriptable ( admin )

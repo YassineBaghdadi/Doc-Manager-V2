@@ -26,26 +26,12 @@
    <string>Form</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">/*
-background-color: rgb(0, 153, 204);
-QLineEdit{
-	
-	background-color: rgb(255, 255, 255);
-	border : 0px solid #ffffff;
+   <string notr="true">
+
+#Form{
+	background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(176, 242, 255, 255), stop:1 rgba(177, 150, 207, 255));
 }
 
-*/
-
-/*
-Aqua Style Sheet for QT Applications
-Author: Jaime A. Quiroga P.
-Company: GTRONICK
-Last updated: 22/01/2019, 07:55.
-Available at: https://github.com/GTRONICK/QSS/blob/master/Aqua.qss
-*/
-QMainWindow {
-	background-color:#ececec;
-}
 QTextEdit {
 	border-width: 1px;
 	border-style: solid;

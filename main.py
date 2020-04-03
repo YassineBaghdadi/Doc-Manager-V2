@@ -34,15 +34,14 @@ class Main(QWidget, main_ui):
     def __init__(self, account_type, parent=None):
         super(Main, self).__init__(parent)
         QWidget.__init__(self)
+        self.setupUi(self)
 
         self.setWindowFlag(QtCore.Qt.WindowCloseButtonHint, False)
-        self.setupUi(self)
+
         self.width_ = 871
         self.height_ = 431
         self.acc_type = account_type
         self.today = str(strftime("%Y-%m-%d %H:%M:%S", gmtime()))
-        print(self.today)
-        # self.today = '2020-01-27 3456'
         self.sqliteConn = sqlite3.connect('src/setting.db')
         self.sqliteCurs = self.sqliteConn.cursor()
         self.host_db, self.user_db, self.passwrd_db, self.DBname, self.port_db = self.sqliteCurs.execute(
@@ -55,93 +54,62 @@ class Main(QWidget, main_ui):
             port=int(self.port_db)
 
         )
-        self.home_icon_2.mousePressEvent = self.aboutUs
         self.mysqlCurs = self.mysqlConn.cursor()
 
         self.setWindowTitle('Home')
-        # self.db_ = DB_m(self.host_db, self.user_db, self.passwrd_db, self.DBname, self.port_db)
 
         if self.acc_type != 'admin':
 
             self.permissions = [i for i in str(self.acc_type)]
-            self.setting_btn.setEnabled(False)
-            self.add_person_btn.setEnabled(False)
-            self.RDV_btn.setEnabled(False)
-            self.search_btn.setEnabled(False)
-            self.Ditails_btn.setEnabled(False)
-            self.sessions_btn.setEnabled(False)
-            self.Statistiques_btn.setEnabled(False)
-            self.pushButton_7.resize(0, 0)
-            if '0' in self.permissions:
-
-                self.add_person_btn.setEnabled(True)
-
-            if '1' in self.permissions:
-                self.RDV_btn.setEnabled(True)
-
-            if '2' in self.permissions:
-                self.search_btn.setEnabled(True)
-
-            if '3' in self.permissions:
-                self.Ditails_btn.setEnabled(True)
-
-            if '4' in self.permissions:
-                self.sessions_btn.setEnabled(True)
-
-            if '5' in self.permissions:
-                self.Statistiques_btn.setEnabled(True)
-
             # self.setting_btn.setEnabled(False)
+            # self.add_person_btn.setEnabled(False)
+            # self.RDV_btn.setEnabled(False)
+            # self.search_btn.setEnabled(False)
+            # self.Ditails_btn.setEnabled(False)
             # self.sessions_btn.setEnabled(False)
             # self.Statistiques_btn.setEnabled(False)
-            print(f'account type : {self.acc_type} \npermissions : {self.permissions}')
-        self.home_frame.resize(self.width_, self.height_)
-        self.home_icon.mousePressEvent = self.showHomeFrame
-        # self.home_icon.setStyleSheet('background-image: url(img/btns/house.png);')
-        # self.setting_btn.setStyleSheet('background-image: url(img/btns/settings.png);')
-        self.home_icon.setPixmap(QtGui.QPixmap('img/btns/house.png'))
-        self.setting_btn.setPixmap(QtGui.QPixmap('img/btns/settings.png'))
-        self.home_icon.setScaledContents(True)
-        self.home_icon_2.setPixmap(QtGui.QPixmap('img/about.png'))
-        self.home_icon_2.setScaledContents(True)
-        self.setting_btn.setScaledContents(True)
-        self.setting_btn.mousePressEvent = self.goSetting
-        palette = QPalette()
-        palette.setBrush(QPalette.Background, QBrush(QImage("img/pack.png")))
-        self.setPalette(palette)
+            # self.pushButton_7.resize(0, 0)
+            # if '0' in self.permissions:
+            #
+            #     # self.add_person_btn.setEnabled(True)
+            #
+            # if '1' in self.permissions:
+            #     # self.RDV_btn.setEnabled(True)
+            #
+            # if '2' in self.permissions:
+            #     # self.search_btn.setEnabled(True)
+            #
+            # if '3' in self.permissions:
+            #     self.Ditails_btn.setEnabled(True)
+            #
+            # if '4' in self.permissions:
+            #     self.sessions_btn.setEnabled(True)
+            #
+            # if '5' in self.permissions:
+            #     self.Statistiques_btn.setEnabled(True)
 
-        self.exit.clicked.connect(self.quit_)
-        self.numbersTree.itemDoubleClicked.connect(self.handler)
 
-        self.nums_combo.currentTextChanged.connect(self.enableSaveBtn)
-        self.addNum.clicked.connect(self.saveNewNum)
-        self.home_refresh()
-        self.num_close.clicked.connect(self.deleteNums)
-        self.num_addNew.clicked.connect(self.addPersonFrame)
-        self.exit_2.clicked.connect(self.logout)
-        self.pushButton_7.clicked.connect(self.go_to_bilan)
+        # self.setting_btn.setPixmap(QtGui.QPixmap('img/btns/settings.png'))
+        # self.home_icon.setScaledContents(True)
 
-        self.pirmis_btn.setPixmap(QtGui.QPixmap('img/car.png'))
-        self.pirmis_btn.setScaledContents(True)
+        # palette = QPalette()
+        # palette.setBrush(QPalette.Background, QBrush(QImage("img/pack.png")))
+        # self.setPalette(palette)
 
-        self.pirmis_btn.mousePressEvent = self.pirmis
+
+        #self.numbersTree.itemDoubleClicked.connect(self.handler)
+
+        # self.nums_combo.currentTextChanged.connect(self.enableSaveBtn)
+
 
 
         ##########################  add person part :  ##########################################################
         self.add_person_btn.setStyleSheet('background-image: url(img/btns/off/add_person_btn.png);')
         # self.add_person_btn.setPixmap(QtGui.QPixmap('img/btns/off/add_person_btn.png'))
         # self.add_person_btn.setScaledContents(True)
-        self.add_person_btn.mousePressEvent = self.addPersonFrame
-        self.add_person_save_btn.setStyleSheet('background-image: url(img/btns/off/save_btn.png);')
-        # self.add_person_save_btn.setPixmap(QtGui.QPixmap('img/btns/off/save_btn.png'))
-        # self.add_person_save_btn.setScaledContents(True)
-        self.add_person_annuler_btn.setStyleSheet('background-image: url(img/btns/off/anuler.png);')
 
-        # self.add_person_annuler_btn.setPixmap(QtGui.QPixmap('img/btns/off/anuler.png'))
-        # self.add_person_annuler_btn.setScaledContents(True)
-        self.add_person_annuler_btn.mousePressEvent = self.addPersonCancel
-        self.birth_date.setDate(QtCore.QDate.currentDate())
-        self.birth_date.dateChanged.connect(self.getAge)
+        # self.birth_date.setDate(QtCore.QDate.currentDate())
+        # self.birth_date.dateChanged.connect(self.getAge)
         self.add_person_save_btn.mousePressEvent = self.addPerson
         # self.children_num.textChanged(self.virifNum(self.children_num))
         self.children_num.setValidator(QIntValidator())
