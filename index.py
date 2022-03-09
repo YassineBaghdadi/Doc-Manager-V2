@@ -44,13 +44,15 @@ class Splash(QWidget, splash_win_dir):
             self.dt = cur.execute('select host, db_user, db_pass, db_name, port from admin_setting').fetchone()
             try:
 
-                self.mysqlConn = pymysql.connect(self.dt[0], self.dt[1], self.dt[2], self.dt[3], int(self.dt[4]))
-                print('connected')
+                self.mysqlConn = pymysql.connect(host= self.dt[0], user= self.dt[1], password= self.dt[2], database= self.dt[3], port= int(self.dt[4]))
+
                 self.logi = LogIn()
                 self.logi.show()
                 self.close()
+                print('connected')
             except Exception as e :
-                print('connection failed')
+
+                print(f'connection failed : {e}')
                 self.err = noInternetAlert.NoInternetAlert()
                 self.err.show()
                 self.close()

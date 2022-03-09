@@ -77,7 +77,7 @@ class LogIn(QWidget, logIn_ui):
             self.err = noInternetAlert.NoInternetAlert(err_content=e)
             self.err.show()
             self.close()
-        self.db_ = pymysql.connect(self.host_db, self.user_db, self.passwrd_db, self.DBname, int(self.port_db))
+        self.db_ = pymysql.connect(host=self.host_db, user=self.user_db, password=self.passwrd_db, database=self.DBname, port=int(self.port_db))
         self.mysqlCur = self.db_.cursor()
     def getInfo(self):
         return self.admin_user, self.admin_pass
